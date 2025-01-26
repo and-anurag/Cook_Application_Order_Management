@@ -51,7 +51,8 @@ fun CookApplication() {
         composable("dashboard") {
 
             DashboardScreen(
-                onTaskClicked = {}
+                onTaskClicked = {},
+                navController = navController
             )
 
         }

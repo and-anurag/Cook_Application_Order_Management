@@ -14,12 +14,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,15 +34,19 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.abitninja.cookapplication.data.model.Task
 import com.abitninja.cookapplication.data.repository.TaskRepository
 import com.abitninja.cookapplication.ui.components.TaskItem
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
+
 
 @Composable
 fun DashboardScreen(
     onTaskClicked: (Task) -> Unit,
-    modifier: Modifier = Modifier.statusBarsPadding()
+    modifier: Modifier = Modifier.statusBarsPadding(),
+    navController: NavController
 ) {
 
     val viewModel: DashboardViewModel = remember { DashboardViewModel(TaskRepository()) }
@@ -57,7 +59,9 @@ fun DashboardScreen(
     val scope = rememberCoroutineScope()
 
     Column(
-        modifier = modifier.padding(4.dp)
+        modifier = modifier.padding(4.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
 
         when {
@@ -137,106 +141,137 @@ fun DashboardScreen(
 
 
                     item {
-                        Button(
-                            modifier = Modifier.padding(8.dp),
-                            onClick = {
-                                scope.launch {
-                                    repo.addTask(
-                                        Task(
-                                            id = "1",
-                                            dishName = "Butter Chicken Burger",
-                                            quantity = 1,
-                                            notes = "Extra mayo",
-                                            completed = false,
-                                            regularMeal = true,
-                                            addOn = "" // No add-on for regular meal
-                                        )
-                                    )
-                                    repo.addTask(
-                                        Task(
-                                            id = "2",
-                                            dishName = "Paneer Wrap",
-                                            quantity = 2,
-                                            notes = "Spicy sauce",
-                                            completed = true,
-                                            regularMeal = true,
-                                            addOn = "" // No add-on for regular meal
-                                        )
-                                    )
-                                    repo.addTask(
-                                        Task(
-                                            id = "3",
-                                            dishName = "Masala Fries Combo",
-                                            quantity = 1,
-                                            notes = "With extra fries",
-                                            completed = false,
-                                            regularMeal = false,
-                                            addOn = "Coke" // Add-on included in combo meal
-                                        )
-                                    )
-                                    repo.addTask(
-                                        Task(
-                                            id = "4",
-                                            dishName = "Tandoori Chicken Sub",
-                                            quantity = 1,
-                                            notes = "No onions",
-                                            completed = true,
-                                            regularMeal = true,
-                                            addOn = "" // No add-on for regular meal
-                                        )
-                                    )
-                                    repo.addTask(
-                                        Task(
-                                            id = "5",
-                                            dishName = "Rajma Rice Bowl",
-                                            quantity = 1,
-                                            notes = "Less salt",
-                                            completed = false,
-                                            regularMeal = true,
-                                            addOn = "" // No add-on for regular meal
-                                        )
-                                    )
-                                    repo.addTask(
-                                        Task(
-                                            id = "6",
-                                            dishName = "Aloo Tikki Burger Combo",
-                                            quantity = 1,
-                                            notes = "Extra ketchup",
-                                            completed = false,
-                                            regularMeal = false,
-                                            addOn = "Pepsi" // Add-on included in combo meal
-                                        )
-                                    )
-                                    repo.addTask(
-                                        Task(
-                                            id = "7",
-                                            dishName = "Veggie Pizza Puff",
-                                            quantity = 3,
-                                            notes = "Serve hot",
-                                            completed = false,
-                                            regularMeal = true,
-                                            addOn = "" // No add-on for regular meal
-                                        )
-                                    )
-                                    repo.addTask(
-                                        Task(
-                                            id = "8",
-                                            dishName = "Chicken Popcorn Meal",
-                                            quantity = 1,
-                                            notes = "Spicy",
-                                            completed = true,
-                                            regularMeal = false,
-                                            addOn = "Sprite" // Add-on included in combo meal
-                                        )
-                                    )
-                                    viewModel.loadTasks()
-                                }
-                            }
+
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(8.dp),
+                            horizontalArrangement = Arrangement.SpaceEvenly,
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
 
-                            Text(text = "Add data to firebase")
+                            Button(
+                                modifier = Modifier.padding(8.dp),
+                                onClick = {
+                                    scope.launch {
+                                        repo.addTask(
+                                            Task(
+                                                id = "1",
+                                                dishName = "Butter Chicken Burger",
+                                                quantity = 1,
+                                                notes = "Extra mayo",
+                                                completed = false,
+                                                regularMeal = true,
+                                                addOn = "" // No add-on for regular meal
+                                            )
+                                        )
+                                        repo.addTask(
+                                            Task(
+                                                id = "2",
+                                                dishName = "Paneer Wrap",
+                                                quantity = 2,
+                                                notes = "Spicy sauce",
+                                                completed = true,
+                                                regularMeal = true,
+                                                addOn = "" // No add-on for regular meal
+                                            )
+                                        )
+                                        repo.addTask(
+                                            Task(
+                                                id = "3",
+                                                dishName = "Masala Fries Combo",
+                                                quantity = 1,
+                                                notes = "With extra fries",
+                                                completed = false,
+                                                regularMeal = false,
+                                                addOn = "Coke" // Add-on included in combo meal
+                                            )
+                                        )
+                                        repo.addTask(
+                                            Task(
+                                                id = "4",
+                                                dishName = "Tandoori Chicken Sub",
+                                                quantity = 1,
+                                                notes = "No onions",
+                                                completed = true,
+                                                regularMeal = true,
+                                                addOn = "" // No add-on for regular meal
+                                            )
+                                        )
+                                        repo.addTask(
+                                            Task(
+                                                id = "5",
+                                                dishName = "Rajma Rice Bowl",
+                                                quantity = 1,
+                                                notes = "Less salt",
+                                                completed = false,
+                                                regularMeal = true,
+                                                addOn = "" // No add-on for regular meal
+                                            )
+                                        )
+                                        repo.addTask(
+                                            Task(
+                                                id = "6",
+                                                dishName = "Aloo Tikki Burger Combo",
+                                                quantity = 1,
+                                                notes = "Extra ketchup",
+                                                completed = false,
+                                                regularMeal = false,
+                                                addOn = "Pepsi" // Add-on included in combo meal
+                                            )
+                                        )
+                                        repo.addTask(
+                                            Task(
+                                                id = "7",
+                                                dishName = "Veggie Pizza Puff",
+                                                quantity = 3,
+                                                notes = "Serve hot",
+                                                completed = false,
+                                                regularMeal = true,
+                                                addOn = "" // No add-on for regular meal
+                                            )
+                                        )
+                                        repo.addTask(
+                                            Task(
+                                                id = "8",
+                                                dishName = "Chicken Popcorn Meal",
+                                                quantity = 1,
+                                                notes = "Spicy",
+                                                completed = true,
+                                                regularMeal = false,
+                                                addOn = "Sprite" // Add-on included in combo meal
+                                            )
+                                        )
+                                        viewModel.loadTasks()
+                                    }
+                                }
+                            ) {
+
+                                Text(text = "Add dummy data to firebase")
+
+                            }
+
+                            Button(
+                                modifier = Modifier.padding(8.dp),
+                                onClick = {
+                                    FirebaseAuth.getInstance().signOut()
+                                    navController.navigate("login") {
+                                        popUpTo("dashboard") { inclusive = true }
+                                    }
+
+                                }
+                            ) {
+                                
+                                Text(text = "Logout")
+
+                            }
+
 
                         }
+
+                        Spacer(modifier = Modifier.height(12.dp))
+
+
                     }
 
                 }
