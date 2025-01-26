@@ -33,8 +33,8 @@ The Food Management System Cook Application streamlines the workflow for cooks b
 ### Screenshots
 
 <p align="center">
-  <img src="screenshots/dashboard_screenshot.png" width="320" alt="Login Screen">
-  <img src="screenshots/login_screenshot.png" width="320" alt="Dashboard Screen">
+  <img src="screenshots/login_screenshot.png" width="320" alt="Login Screen">
+  <img src="screenshots/dashboard_screenshot.png" width="320" alt="Dashboard Screen">
   <img src="screenshots/show_details_screenshot.png" width="320" alt="Meal Details Screen">
 </p>
 
