@@ -29,17 +29,17 @@ The Food Management System Cook Application streamlines the workflow for cooks b
 
 ## Screenshots
 
-### 1. Login Screen
-(Placeholder for screenshot)
 
-### 2. Dashboard Screen
-(Placeholder for screenshot)
+<p align="center">
+   ### 1. Login Screen
+  <img src="screenshots/dashboard_screenshot.png" width="400" alt="First screen">
 
-### 3. Food Orders List
-(Placeholder for screenshot)
+   ### 2. Dashboard Screen
+  <img src="screenshots/login_screenshot.png" width="400" alt="Second screen">
 
-### 4. Meal Details Screen
-(Placeholder for screenshot)
+  ### 4. Meal Details Screen
+  <img src="screenshots/show_details_screenshot.png" width="400" alt="Second screen">
+</p>
 
 ---
 
