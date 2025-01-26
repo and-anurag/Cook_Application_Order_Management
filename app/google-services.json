@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "691789378574",
+    "firebase_url": "https://cook-application-8bbb9-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "cook-application-8bbb9",
+    "storage_bucket": "cook-application-8bbb9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:691789378574:android:4b2be9808f27869c59f85f",
+        "android_client_info": {
+          "package_name": "com.abitninja.cookapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyT6kC2oBPmpNKGa7kcHnpSO5pze3QafM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
